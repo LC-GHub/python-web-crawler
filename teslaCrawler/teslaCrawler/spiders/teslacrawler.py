@@ -55,7 +55,7 @@ class TeslaSpider(scrapy.Spider):
 
         print(item)
         # Uncomment this if you want to insert into MongoDB
-        self.mongodb.save_json(item_dict)
+        # self.mongodb.save_json(item_dict)
 
         linksFound = LinkExtractor().extract_links(response)
 
