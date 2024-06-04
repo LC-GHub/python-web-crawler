@@ -11,20 +11,12 @@ BOT_NAME = "teslaCrawler"
 
 SPIDER_MODULES = ["teslaCrawler.spiders"]
 NEWSPIDER_MODULE = "teslaCrawler.spiders"
-SPLASH_URL = 'http://localhost:8050'  # URL where Splash is running
 
-DOWNLOADER_MIDDLEWARES = {
-    'scrapy_splash.SplashCookiesMiddleware': 723,
-    'scrapy_splash.SplashMiddleware': 725,
-    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
-}
+JOBDIR = 'teslaCrawler/teslaCrawler'
 
-SPIDER_MIDDLEWARES = {
-    'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
-}
 
-DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
-HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
+
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = "teslaCrawler (Information-Retrieval Module from SIT)"
@@ -71,9 +63,10 @@ DOWNLOAD_DELAY = 10.0  # Introduce a 10s delay
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    "teslaCrawler.middlewares.TeslacrawlerDownloaderMiddleware": 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   "teslaCrawler.middlewares.TeslacrawlerDownloaderMiddleware": 543,
+    "scrapy_selenium.SeleniumMiddleware": 800
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -112,3 +105,5 @@ DOWNLOAD_DELAY = 10.0  # Introduce a 10s delay
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
+
+SELENIUM_DRIVER_ARGUMENTS = [] 

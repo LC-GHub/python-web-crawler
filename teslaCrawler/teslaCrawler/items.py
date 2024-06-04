@@ -7,6 +7,9 @@ import scrapy
 
 
 class TeslacrawlerItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    main_content = scrapy.Field()
+    title = scrapy.Field()
+    description = scrapy.Field()
+    keywords = scrapy.Field()
+    url = scrapy.Field()
+    full_html = scrapy.Field()
