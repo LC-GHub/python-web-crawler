@@ -24,7 +24,7 @@ class TeslaSpider(scrapy.Spider):
 
     def start_requests(self):
         urls = [
-            'https://www.tesla.com/',
+            # 'https://www.tesla.com/',
             'https://www.tesla.com/modely/design#overview'
         ]
         for url in urls:
@@ -51,11 +51,11 @@ class TeslaSpider(scrapy.Spider):
         item['description'] = self.getDescByOgDesc(response)
         item['keywords'] = self.getKeywordsByKeywords(response)
         item['url'] = response.url
-
         item_dict = dict(item)
+
         print(item)
         # Uncomment this if you want to insert into MongoDB
-        # self.mongodb.save_json(item_dict)
+        self.mongodb.save_json(item_dict)
 
         linksFound = LinkExtractor().extract_links(response)
 

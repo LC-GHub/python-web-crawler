@@ -1,3 +1,5 @@
+from shutil import which
+
 # Scrapy settings for teslaCrawler project
 #
 # For simplicity, this file contains only settings considered important or
@@ -13,6 +15,11 @@ SPIDER_MODULES = ["teslaCrawler.spiders"]
 NEWSPIDER_MODULE = "teslaCrawler.spiders"
 
 JOBDIR = 'teslaCrawler/teslaCrawler'
+
+# Selenium configs
+SELENIUM_DRIVER_NAME = 'chrome'
+SELENIUM_DRIVER_EXECUTABLE_PATH = which('chromedriver')
+SELENIUM_DRIVER_ARGUMENTS=[] # '--headless' if using chrome instead of firefox
 
 
 
