@@ -11,7 +11,7 @@ import json
 from teslaCrawler.items import TeslacrawlerItem
 from .MongoDB import MongoDB as db
 
-lang_country_url_pattern = r'https://www\.tesla\.com/[a-z]{2}_[a-z]{2}.*'
+lang_country_url_pattern = r'https://www\.tesla\.com/[a-z]{2}_[A-Z]{2}/'
 CONNECTION_STRING = "mongodb+srv://irproject991:12312331231233@cluster0.x0jpsot.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 DATABASE_NAME = "IR-2024"
 COLLECTION_NAME = "crawler-data"
@@ -25,12 +25,13 @@ class TeslaSpider(scrapy.Spider):
     def start_requests(self):
         urls = [
             # 'https://www.tesla.com/',
-            'https://www.tesla.com/modely/design#overview'
+            'https://www.tesla.com/fr_CA/model3/design#overview'
         ]
         for url in urls:
             yield SeleniumRequest(url=url,wait_time=10 ,callback=self.parse)
 
     def parse(self, response):
+        print("Inside Parse")
         # Skip any URL that is tesla.com/<lang>_<country>
         if (self.regionalURLRegexCheck(response.url)):
             return
@@ -65,7 +66,13 @@ class TeslaSpider(scrapy.Spider):
 
 
     def regionalURLRegexCheck(self, url):
-        return re.match(lang_country_url_pattern, url)
+        pattern = re.compile(lang_country_url_pattern)
+        match = pattern.search(url)
+        if match:
+            print(f"{url} is not allowed, is a lang Url")
+            return True
+        else:
+            return False
     
     def isAllowedURLcheck(self, response):
         parsed_url = urlparse(response.url)
