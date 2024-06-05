@@ -25,13 +25,12 @@ class TeslaSpider(scrapy.Spider):
     def start_requests(self):
         urls = [
             # 'https://www.tesla.com/',
-            'https://www.tesla.com/fr_CA/model3/design#overview'
+            'https://www.tesla.com/fi_FI/findus/location/service/VancouverWA'
         ]
         for url in urls:
             yield SeleniumRequest(url=url,wait_time=10 ,callback=self.parse)
 
     def parse(self, response):
-        print("Inside Parse")
         # Skip any URL that is tesla.com/<lang>_<country>
         if (self.regionalURLRegexCheck(response.url)):
             return
